@@ -17,9 +17,9 @@ public class UserController {
     private String port;
 
     @RequestMapping("/getByUserId")
-    public Res getByUserId(Long userId) {
+    public Res getByUserId(Long userId) throws InterruptedException {
         System.out.println(port);
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
         return Res.success(userService.getByUserId(userId));
     }
 }
