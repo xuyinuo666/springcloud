@@ -1,0 +1,39 @@
+server:
+  port: 3333
+eureka:
+  instance:
+    hostname: localhost:3333
+    instance-id: localhost:3333
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9999/eureka
+feign:
+  hystrix:
+    enabled: true #在feign中开启hystrix
+hystrix:
+  threadpool:
+    default:
+      coreSize: 10  #并发执行的最大线程数，默认10
+  command:
+    #对所有的hytrtix command进行设置，优先级不如单独设置
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000  #命令执行超时时间，默认1000ms
+  circuitBreaker:
+    # 熔断器在整个统计时间内是否开启的阀值, 默认20个请求
+    requestVolumeThreshold: 8
+    # 熔断器默认工作时间, 默认: 5 秒
+    sleepWindowInMilliseconds: 5
+    # 默认: 50%, 当出错率超过50% 后熔断器启动
+    errorThresholdPercentage: 50
+    # 是否强制开启熔断器阻断所有请求, 默认: false, 不开启
+    forceOpen: false
+    # 是否允许熔断器忽略错误, 默认false, 不开启
+    forceClosed: false
+spring:
+  application:
+    name: consumer1
