@@ -21,6 +21,7 @@ public class UserController {
     @RequestMapping("/getByUserId")
     public Res getByUserId(@RequestParam("userId") Long userId) {
         System.out.println(port);
+        System.out.println("adsf");
         User byUserId = userService.getByUserId(userId);
         return Res.success(byUserId);
     }
